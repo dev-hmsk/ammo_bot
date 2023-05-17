@@ -1,15 +1,10 @@
 import requests
-import json
-
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from config.model import Ammunition
 
-# The default URL is ammobuy.com
-# Currently only searches through the first page.
 
-
-def scrape_ammunition_info(url):
+def scrape_ammo_info(url):
 
     # Get Caliber from URL
     caliber = url.split("/ammo/")[-1]
@@ -41,28 +36,17 @@ def scrape_ammunition_info(url):
     retailer = [element['href'].split("/retailer/")[-1] for element in retailer_elements]
 
     # Create Ammunition Obj
-    result = zip(cpr, total_price, rounds, grain, retailer, href)
+    temp_collection = zip(cpr, total_price, rounds, grain, retailer, href)
 
-    # print(result)
     # Print the pairs with the caliber
     ammo_collection = []
-    for cpr, total_price, rounds, grain, retailer, href in result:
+
+    for cpr, total_price, rounds, grain, retailer, href in temp_collection:
         ammo_obj = Ammunition(caliber, cpr, total_price, rounds, grain, retailer, href)
-        # print("--------------------")
-        print(ammo_obj)
+        # print(ammo_obj)
+        # print('------------------------')
         ammo_collection.append(ammo_obj)
-    # print(ammo_collection)
     
+    return caliber, ammo_collection
 
-def read_urls_from_json(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
-    return data['urls']
-
-
-file_path = './config/urls.json'
-urls = read_urls_from_json(file_path)
-
-# Scrape each caliber specific webpage
-for url in urls:
-    scrape_ammunition_info(url)
+    
