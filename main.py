@@ -17,12 +17,11 @@ def main():
     
         with open('template/ammunition_template.html') as file:
             template = Template(file.read())
-
             # Render the template with the ammunition data
             html_content = template.render(ammunition_list=ammo_collection)
-
         with open(f'{caliber}_ammunition_email.html', 'w') as file:
             file.write(html_content)
+        
         print("Email HTML file created: ammunition_email.html")
 
 # Print a message to confirm the file has been written
@@ -32,12 +31,9 @@ def read_urls_from_json(file_path):
         data = json.load(file)
     return data['urls']
 
-
-
-
 if __name__ == "__main__":
     while START == True:
         main()
-        print('cancel here')
+        print('CANCEL HERE')
         time.sleep(10)
         

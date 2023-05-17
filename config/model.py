@@ -1,4 +1,3 @@
-
 class Ammunition:
     def __init__(self, caliber, cpr, total_price, rounds, grains, retailer, href):
         self.caliber = caliber
