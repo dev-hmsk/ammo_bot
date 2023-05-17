@@ -1,22 +1,27 @@
 import matplotlib.pyplot as plt
 
-def create_graph(ammunitions):
-    # Extract the cpr values from the Ammunition objects
-    cpr_values = [ammo.cpr for ammo in ammunitions]
+def cpr_graph(objects, filename):
 
-    # Create the x-axis values as indices of the cpr_values list
-    x_values = range(len(cpr_values))
+    # Extract self.cpr and self.timestamp as paired variables
+    paired_variables = [(obj.timestamp, obj.cpr) for obj in objects]
 
-    # Plot the line graph
-    plt.plot(x_values, cpr_values, marker='o')
+    # Unzip the paired variables into separate lists for x and y values
+    timestamps, cpr_values = zip(*paired_variables)
 
-    # Customize the graph labels and title
-    plt.xlabel('Ammunition Index')
-    plt.ylabel('CPR Value')
-    plt.title('Line Plot of CPR Values')
+    # Plotting the line graph
+    plt.plot(timestamps, cpr_values, marker='o')
+    plt.xlabel('Time')
+    plt.ylabel('self.cpr')
+    plt.title('self.cpr over Time')
 
-    # Save the graph as an image file
-    plt.savefig('line_plot.png')
+    # Formatting the x-axis tick labels as dates
+    date_fmt = '%Y-%m-%d'  # Format for the tick labels
+    plt.gca().xaxis.set_major_formatter(plt.FixedFormatter([timestamp.strftime(date_fmt) for timestamp in timestamps]))
 
-    # Display the graph
-    plt.show()
+    # Rotating the x-axis tick labels for better readability
+    plt.xticks(rotation=45)
+
+    # Save the line graph as an image
+    plt.tight_layout()
+    plt.savefig(filename, dpi=300, format='png')
+

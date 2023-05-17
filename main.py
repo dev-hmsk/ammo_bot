@@ -1,5 +1,5 @@
 from web.ammo_scraper import scrape_ammo_info
-from graphs.create_graph import create_graph
+from graphs.create_graph import cpr_graph
 from jinja2 import Template
 import json
 import time 
@@ -18,7 +18,7 @@ def main():
         # Since each URL is defined by caliber each ammo_collection returned will be 
         # by default collected by shared caliber.
         current_date, caliber , ammo_collection = scrape_ammo_info(url)
-        create_graph(ammo_collection)
+        cpr_graph(ammo_collection,(f'{caliber} + {current_date}'))
         with open('template/ammunition_template.html') as file:
             template = Template(file.read())
             # Render the template with the ammunition data
