@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from config.model import Ammunition
+import datetime
 
-
-def scrape_ammo_info(url):
+def scrape_ammo_info(url):  
 
     # Get Caliber from URL
     caliber = url.split("/ammo/")[-1]
@@ -12,6 +12,10 @@ def scrape_ammo_info(url):
     # Add url string to default to searching only free shipping
     url += "&ship=0"  # Append "&ship=0" to the URL
 
+
+    # Create time stamp 
+    timestamp = datetime.datetime.now()
+    current_date = timestamp.date().strftime('%m-%d-%Y')
     # Get URL response
     response = requests.get(url)
     html_content = response.content
@@ -42,11 +46,10 @@ def scrape_ammo_info(url):
     ammo_collection = []
 
     for cpr, total_price, rounds, grain, retailer, href in temp_collection:
-        ammo_obj = Ammunition(caliber, cpr, total_price, rounds, grain, retailer, href)
+        ammo_obj = Ammunition(caliber, cpr, total_price, rounds, grain, retailer, href, current_date)
         # print(ammo_obj)
         # print('------------------------')
         ammo_collection.append(ammo_obj)
     
-    return caliber, ammo_collection
+    return current_date, caliber, ammo_collection
 
-    
