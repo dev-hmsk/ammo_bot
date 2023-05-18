@@ -32,9 +32,9 @@ def scrape_ammo_info(url):
     retailer_elements = soup.select("a[href^='/retailer/']")
 
     # Extract the text values and href attributes
-    cpr = [element.get_text(strip=True) for element in cpr_elements]
+    cpr = [element.get_text(strip=True).lstrip('$') for element in cpr_elements]
     href = [urljoin(url, element['href']) for element in href_elements]
-    total_price = ["$" + element.get_text(strip=True) for element in total_price_elements]
+    total_price = [element.get_text(strip=True) for element in total_price_elements]
     rounds = [element.get_text(strip=True) for element in rounds_elements]
     grain = [element.get_text(strip=True) for element in grains_elements]
     retailer = [element['href'].split("/retailer/")[-1] for element in retailer_elements]

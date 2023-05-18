@@ -18,7 +18,10 @@ def main():
         # Since each URL is defined by caliber each ammo_collection returned will be 
         # by default collected by shared caliber.
         current_date, caliber , ammo_collection = scrape_ammo_info(url)
-        cpr_graph(ammo_collection,(f'{caliber} + {current_date}'))
+        # Create Graph
+        # Assigned as Bug #1
+        # cpr_graph(ammo_collection, caliber, (f'{caliber} + {current_date}.png'))
+        
         with open('template/ammunition_template.html') as file:
             template = Template(file.read())
             # Render the template with the ammunition data

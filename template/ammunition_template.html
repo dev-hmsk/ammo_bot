@@ -69,8 +69,8 @@
             {% for ammo in ammunition_list %}
                 <tr>
                     <td>{{ ammo.caliber }}</td>
-                    <td>{{ ammo.cpr }}</td>
-                    <td>{{ ammo.total_price }}</td>
+                    <td>${{ ammo.cpr }}</td>
+                    <td>${{ ammo.total_price }}</td>
                     <td>{{ ammo.rounds }}</td>
                     <td>{{ ammo.grains }}</td>
                     <td>{{ ammo.retailer }}</td>
