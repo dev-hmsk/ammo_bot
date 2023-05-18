@@ -6,23 +6,36 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 10px;
         }
 
         h1 {
             text-align: center;
             color: #333;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 32px;
+            text-transform: uppercase;
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
-            background-color: #fff;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
         th, td {
             border: none;
-            padding: 12px 20px;
+            padding: 10px;
             text-align: left;
             font-size: 14px;
             color: #555;
@@ -31,6 +44,7 @@
         th {
             background-color: #f2f2f2;
             font-weight: bold;
+            text-transform: uppercase;
         }
 
         tbody tr:nth-child(even) {
@@ -44,40 +58,80 @@
         a {
             color: #337ab7;
             text-decoration: none;
+            font-weight: bold;
         }
 
         a:hover {
             text-decoration: underline;
         }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 150px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
-    <h1>Ammunition Information for {{current_date}}</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Caliber</th>
-                <th>Price (CPR)</th>
-                <th>Total Price</th>
-                <th>Rounds</th>
-                <th>Grains</th>
-                <th>Retailer</th>
-                <th>URL</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ammo in ammunition_list %}
+    <div class="container">
+        <div class="logo">
+            <pre>
+
+.----------------.  .----------------.  .----------------.  .----------------. 
+| .--------------. || .--------------. || .--------------. || .--------------. |
+| |  ____  ____  | || | ____    ____ | || |    _______   | || |  ___  ____   | |
+| | |_   ||   _| | || ||_   \  /   _|| || |   /  ___  |  | || | |_  ||_  _|  | |
+| |   | |__| |   | || |  |   \/   |  | || |  |  (__ \_|  | || |   | |_/ /    | |
+| |   |  __  |   | || |  | |\  /| |  | || |   '.___`-.   | || |   |  __'.    | |
+| |  _| |  | |_  | || | _| |_\/_| |_ | || |  |`\____) |  | || |  _| |  \ \_  | |
+| | |____||____| | || ||_____||_____|| || |  |_______.'  | || | |____||____| | |
+| |              | || |              | || |              | || |              | |
+| '--------------' || '--------------' || '--------------' || '--------------' |
+'----------------'  '----------------'  '----------------'  '----------------' 
+
+            </pre>
+        </div>
+        <h1>Ammunition Information for {{current_date}}</h1>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ ammo.caliber }}</td>
-                    <td>${{ ammo.cpr }}</td>
-                    <td>${{ ammo.total_price }}</td>
-                    <td>{{ ammo.rounds }}</td>
-                    <td>{{ ammo.grains }}</td>
-                    <td>{{ ammo.retailer }}</td>
-                    <td><a href="{{ ammo.href }}">{{ ammo.href }}</a></td>
+                    <th>Caliber</th>
+                    <th>Price (CPR)</th>
+                    <th>Total Price</th>
+                    <th>Rounds</th>
+                    <th>Grains</th>
+                    <th>Retailer</th>
+                    <th>URL</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+            </thead>
+            <tbody>
+                {% for ammo in ammunition_list %}
+                    <tr>
+                        <td>{{ ammo.caliber }}</td>
+                        <td>${{ ammo.cpr }}</td>
+                        <td>${{ ammo.total_price }}</td>
+                        <td>{{ ammo.rounds }}</td>
+                        <td>{{ ammo.grains }}</td>
+                        <td>{{ ammo.retailer }}</td>
+                        <td><a href="{{ ammo.href }}">{{ ammo.href }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="footer">
+            <p>This ammunition information is provided by HMSK. For more details, visit our Github profile at <a href="https://github.com/dev-hmsk">DEV_HMSK</a>.</p>
