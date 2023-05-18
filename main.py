@@ -8,6 +8,7 @@ import os
 current_directory = os.getcwd()
 
 START = True
+
 def main():
 
     # Load urls from urls.json
